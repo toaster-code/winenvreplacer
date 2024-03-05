@@ -9,7 +9,7 @@ import (
 )
 
 // replaceEnvVariables replaces Windows environment variable references in a string.
-func replaceEnvVariables(src string) string {
+func ReplaceEnvVariables(src string) string {
 	// Define a regular expression to match expressions like %VAR_NAME%
 	regex := regexp.MustCompile(`%([^%]+)%`)
 
