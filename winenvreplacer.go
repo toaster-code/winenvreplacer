@@ -19,7 +19,7 @@ func ReplaceEnvVariables(src string) string {
 		envVarValue, envVarExists := os.LookupEnv(strings.Trim(match, "%"))
 		// Check if the environment variable exists, otherwise return the original match
 		if !envVarExists {
-			return match
+			return ""
 		}
 				// Recursively expand the environment variable value
 		expandedValue := ReplaceEnvVariables(envVarValue)
