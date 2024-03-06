@@ -1,5 +1,5 @@
 // winenvreplacer.go
-package main
+package winenvreplacer
 
 import (
 	"fmt"
