@@ -15,18 +15,15 @@ func ReplaceEnvVariables(src string) string {
 
 	// Replace matches with their corresponding environment variable values
 	result := regex.ReplaceAllStringFunc(src, func(match string) string {
-		// Retrieve the Windows environment variable value using the match as the variable name
-		// Extract the variable name from the match
-		varName := match[1 : len(match)-1]
-		envVarValue, envVarExists := os.LookupEnv(varName)
-
+		// Retrieve the Windows environment variable value using the match as the variable name and trim the "%"" signs
+		envVarValue, envVarExists := os.LookupEnv(strings.Trim(match, "%"))
 		// Check if the environment variable exists, otherwise return the original match
 		if !envVarExists {
-			fmt.Printf("Environment variable %s does not exist\n", match)
-			return ""
+			return match
 		}
-		fmt.Printf("Replacing %s with %s\n", match, envVarValue)
-		return envVarValue
+				// Recursively expand the environment variable value
+		expandedValue := ReplaceEnvVariables(envVarValue)
+		return expandedValue
 	})
 
 	return result
