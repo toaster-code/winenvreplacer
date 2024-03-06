@@ -19,7 +19,7 @@ func ReplaceEnvVariables(src string) string {
 		// Extract the variable name from the match
 		varName := match[1 : len(match)-1]
 		envVarValue, envVarExists := os.LookupEnv(varName)
-		
+
 		// Check if the environment variable exists, otherwise return the original match
 		if !envVarExists {
 			fmt.Printf("Environment variable %s does not exist\n", match)
@@ -41,16 +41,16 @@ func LookupEnvWithPercent(key string) (string, bool) {
 	return envVarValue, envVarExists
 }
 
-func main() {
+func Example() {
 	// Test the function "replaceEnvVariables":
 	// Example usage
 	inputString := "GOPATH=%GOPATH%, PROMPT=%PROMPT%, USERPROFILE=%USERPROFILE%, Non-existent=%NON_EXISTENT%"
-	result := replaceEnvVariables(inputString)
+	result := ReplaceEnvVariables(inputString)
 	fmt.Println("INPUT:")
 	fmt.Println(inputString)
 	fmt.Println("RESULT:")
 	fmt.Println(result)
-	
+
 	// Test the function "LookupEnvWithPercent"
 	// Example usage
 	fmt.Println(LookupEnvWithPercent("%PATH%"))
